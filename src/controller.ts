@@ -6,10 +6,25 @@ import { baseUrl } from './server';
 
 export default {
 
+  /**
+   * Shows Welcome Message and info for usage as json
+   * @param request 
+   * @param response 
+   */
   welcome: (request: Request, response: Response) => response.json({
-    welcome_message: 'Youtube-DL in Node.JS: https://youtube-dl-node.herokuroutes.com/list'
+
+    welcome_message: 'Youtube-DL in Node.JS: https://youtube-dl-node.herokuroutes.com/list',
+    info: 'send JSON{ "url" : "http://exemple.com" } of the video as POST to https://youtube-dl-node.herokuroutes.com/'
+  
   }),
 
+  /**
+   * Given provided url in request body, it uses
+   * youtube-dl to download the video as a mp3 file
+   * and returns the download url to response json
+   * @param request 
+   * @param response 
+   */
   downloadMusic: (request: Request, response: Response) => {
 
     const { url } = request.body;
@@ -33,6 +48,12 @@ export default {
 
   },
 
+  /**
+   * list available files urls to download
+   * on response json
+   * @param request 
+   * @param response 
+   */
   listFiles: (request: Request, response: Response) => {
 
     fs.readdir(path.resolve(__dirname, '..', 'output'),

@@ -4,7 +4,9 @@ import controller from './controller';
 
 const routes = express.Router();
 
+//host output folder files
 routes.use('/output', express.static(path.resolve(__dirname, '..', 'output')));
+
 routes.get('/list', controller.listFiles);
 
 routes.get('/', controller.welcome)
