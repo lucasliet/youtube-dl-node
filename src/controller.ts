@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
 import { exec } from 'child_process';
-import { baseUrl, port } from './server';
+import { baseUrl } from './server';
 
 export default {
 
@@ -26,7 +26,7 @@ export default {
 
       if (match) {
         const filename: string = match[1].replace(/ /g, '%20');
-        response.status(200).json({ video_url: `${baseUrl}:${port}/${filename}` });
+        response.status(200).json({ video_url: `${baseUrl}/${filename}` });
       }
       else response.status(500).json(stdout);
     });
@@ -43,7 +43,7 @@ export default {
           return;
         }
         response.json(
-          files.map(file => `${baseUrl}:${port}/output/${file.replace(/ /g, '%20')}`)
+          files.map(file => `${baseUrl}/output/${file.replace(/ /g, '%20')}`)
         );
       }
     );
