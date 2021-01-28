@@ -8,9 +8,22 @@ const fs_1 = __importDefault(require("fs"));
 const child_process_1 = require("child_process");
 const server_1 = require("./server");
 exports.default = {
+    /**
+     * Shows Welcome Message and info for usage as json
+     * @param request
+     * @param response
+     */
     welcome: (request, response) => response.json({
-        welcome_message: 'Youtube-DL in Node.JS: https://youtube-dl-node.herokuroutes.com/list'
+        welcome_message: 'Youtube-DL in Node.JS: https://youtube-dl-node.herokuroutes.com/list',
+        info: 'send JSON{ "url" : "http://exemple.com" } of the video as POST to https://youtube-dl-node.herokuroutes.com/'
     }),
+    /**
+     * Given provided url in request body, it uses
+     * youtube-dl to download the video as a mp3 file
+     * and returns the download url to response json
+     * @param request
+     * @param response
+     */
     downloadMusic: (request, response) => {
         const { url } = request.body;
         const command = 'PATH=./bin:$PATH youtube-dl --extract-audio --audio-format=mp3 --audio-quality=9 -o "output/%(artist)s-%(title)s.%(format)s" ';
@@ -29,6 +42,12 @@ exports.default = {
                 response.status(500).json(stdout);
         });
     },
+    /**
+     * list available files urls to download
+     * on response json
+     * @param request
+     * @param response
+     */
     listFiles: (request, response) => {
         fs_1.default.readdir(path_1.default.resolve(__dirname, '..', 'output'), (err, files) => {
             if (err) {

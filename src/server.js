@@ -8,7 +8,9 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const routes_1 = __importDefault(require("./routes"));
 const port = process.env.PORT || 3333;
-exports.baseUrl = process.env.NODE_ENV === 'production' ? 'https://youtube-dl-node.herokuapp.com' : `http://localhost:${port}`;
+exports.baseUrl = process.env.NODE_ENV === 'production'
+    ? 'https://youtube-dl-node.herokuapp.com'
+    : `http://localhost:${port}`;
 const app = express_1.default();
 app.use(cors_1.default());
 app.use(express_1.default.json());
