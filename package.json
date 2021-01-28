@@ -5,7 +5,7 @@
   "author": "Lucas Souza <lucasouliveira@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/server.js",
     "devdb": "ts-node-dev ./node_modules/typeorm/cli.js schema:sync",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "predeploy": "tsc -p .; cp -r package.json bin/ output/ ./dist",
