@@ -23,7 +23,7 @@ exports.default = {
             const match = stdout.match(/\[ffmpeg\] Destination: (.+.mp3)/);
             if (match) {
                 const filename = match[1].replace(/ /g, '%20');
-                response.status(200).json({ video_url: `${server_1.baseUrl}:${server_1.port}/${filename}` });
+                response.status(200).json({ video_url: `${server_1.baseUrl}/${filename}` });
             }
             else
                 response.status(500).json(stdout);
@@ -36,7 +36,7 @@ exports.default = {
                 console.error(err);
                 return;
             }
-            response.json(files.map(file => `${server_1.baseUrl}:${server_1.port}/output/${file.replace(/ /g, '%20')}`));
+            response.json(files.map(file => `${server_1.baseUrl}/output/${file.replace(/ /g, '%20')}`));
         });
     }
 };
