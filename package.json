@@ -2,13 +2,13 @@
   "name": "youtube-dl-node",
   "version": "1.0.0",
   "description": "use youtube-dl to download files and host with node",
-  "main": "server.js",
   "author": "Lucas Souza <lucasouliveira@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "node server.js",
     "devdb": "ts-node-dev ./node_modules/typeorm/cli.js schema:sync",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
-    "predeploy": "tsc -p .; cp package.json ./dist",
+    "predeploy": "tsc -p .; cp -r package.json bin/ output/ ./dist",
     "deploy": "gh-pages -d ./dist -b production; rm -rf ./dist",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
