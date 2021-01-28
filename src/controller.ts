@@ -28,7 +28,7 @@ export default {
   downloadMusic: (request: Request, response: Response) => {
 
     const { url } = request.body;
-    const command = 'PATH=./bin:$PATH youtube-dl --extract-audio --audio-format=mp3 --audio-quality=9 -o "output/%(artist)s-%(title)s.%(format)s" ';
+    const command = 'PATH=./bin:$PATH youtube-dl --extract-audio --audio-format=mp3 --audio-quality=9 --embed-thumbnail --add-metadata "ytsearch:%(artist) %(title)" -o "output/%(artist)s-%(title)s.%(format)s" ';
 
     exec(command + url, (err, stdout, stderr) => {
       if (err) {
