@@ -9,7 +9,6 @@ routes.use('/output', express.static(path.resolve(__dirname, '..', 'output')));
 
 routes.get('/list', controller.listFiles);
 
-routes.get('/', controller.welcome)
-routes.post('/', controller.downloadMusic);
+routes.get('/', controller.downloadMusic)
 
 export default routes;

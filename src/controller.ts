@@ -5,19 +5,6 @@ import { exec } from 'child_process';
 import { baseUrl } from './server';
 
 export default {
-
-  /**
-   * Shows Welcome Message and info for usage as json
-   * @param request 
-   * @param response 
-   */
-  welcome: (request: Request, response: Response) => response.json({
-
-    welcome_message: 'Youtube-DL in Node.JS: https://youtube-dl-node.herokuroutes.com/list',
-    info: 'send JSON{ "url" : "http://exemple.com" } of the video as POST to https://youtube-dl-node.herokuroutes.com/'
-  
-  }),
-
   /**
    * Given provided url in request body, it uses
    * youtube-dl to download the video as a mp3 file
@@ -27,7 +14,13 @@ export default {
    */
   downloadMusic: (request: Request, response: Response) => {
 
-    const { url } = request.body;
+    const { url } = request.query;
+
+    if (!url) return response.json({
+      welcome_message: `Youtube-DL in Node.JS: ${baseUrl}/list`,
+      usage: `${baseUrl}?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ`,
+    });
+
     const command = 'PATH=./bin:$PATH youtube-dl --extract-audio --audio-format=mp3 --audio-quality=9 --embed-thumbnail --add-metadata "ytsearch:%(artist) %(title)" -o "output/%(artist)s-%(title)s.%(format)s" ';
 
     exec(command + url, (err, stdout, stderr) => {
