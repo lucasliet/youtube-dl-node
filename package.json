@@ -6,11 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/server.js",
-    "devdb": "ts-node-dev ./node_modules/typeorm/cli.js schema:sync",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "predeploy": "tsc -p .; cp -r package.json bin/ output/ ./dist",
-    "deploy": "gh-pages -d ./dist -b production; rm -rf ./dist",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "deploy": "gh-pages -d ./dist -b production; rm -rf ./dist"
   },
   "dependencies": {
     "cors": "^2.8.5",
